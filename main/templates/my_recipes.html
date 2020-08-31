@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>My Cookbook</h1>
+    <div class="row">
+    {% for recipe in user.profile.recipes.all %}
+         <div class="card m-2" style="width: 18rem;">
+      <img src="{{ recipe.image }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.title }}</h5>
+          {% autoescape off %}
+              <p class="card-text">{{ recipe.summary }}.</p>
+          {% endautoescape %}
+      </div>
+      <ul class="list-group list-group-flush">
+          {% for ingredient in recipe.ingredient_set.all %}
+                  <li class="list-group-item">Name: {{ingredient.name}}. Amount: {{ingredient.amount}}</li>
+          {% endfor %}
+
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Save to my Cookbook</a>
+      </div>
+    </div>
+
+    {% endfor %}
+    </div>
+
+{% endblock %}
